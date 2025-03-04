@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Internal Applications API
+  version: 1.0.0
+  description: API для управления внутренними приложениями
+servers:
+  - url: 'http://localhost:8080/v1/external'
+paths:
+  /v1/external/credits:
+    post:
+      summary: Создать новый кредит
+      operationId: createCredit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credit'
+      responses:
+        '201':
+          description: Кредит успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '400':
+          description: Неверный ввод
+components:
+  schemas:
+    Credit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        amount:
+          type: number
+          format: float
+          example: 1000.0
+        interestRate:
+          type: number
+          format: float
+          example: 5.0
+        userId:
+          type: string
+          example: "user123"
