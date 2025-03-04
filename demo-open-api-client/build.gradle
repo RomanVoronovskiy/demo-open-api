@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.1'
+    id 'org.openapi.generator' version '7.3.0'
+}
+
+group = 'ru.roketx.demo'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.1' // Актуальная версия
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.2' // Актуальная версия
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.1' // Актуальная версия
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1' // Актуальная версия
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15' // Актуальная версия
+}
+
+openApiGenerate {
+    generatorName.set("spring") // Используйте Spring генератор (обяз.)
+    inputSpec.set("$projectDir/src/main/resources/api.yaml")  // Путь к локальному api.yaml (обяз.)
+    outputDir.set("$buildDir/generated-sources/swagger") // Путь, куда будет сгенерирован клиент (обяз.)
+    apiPackage.set("org.openapitools.api") // Пакет для API
+    modelPackage.set("org.openapitools.model") // Пакет для моделей
+    ignoreFileOverride.set("$projectDir/.openapi-generator-ignore")
+    configOptions.set([
+            interfaceOnly: "true", // Генерировать только интерфейсы
+            skipDefaultInterface: "true", // Пропустить создание дефолтной реализации интерфейса
+            additionalModelTypeAnnotations: "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",
+            generatedConstructorWithRequiredArgs: "false",
+            openApiNullable: "false",
+            useSpringBoot3: "true"
+    ])
+}
+
+tasks.named("compileJava"){
+    dependsOn("openApiGenerate")
+}
+
+//sourceSets {
+//    main {
+//        java {
+//            srcDir "$buildDir/generated-sources/swagger/src/main/java" // Добавьте сгенерированные файлы в исходники
+//        }
+//    }
+//}
+
+sourceSets {
+    main {
+        java {
+            srcDir "$projectDir/../demo-open-api-client/build/generated-sources/swagger/src/main/java"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+//Блок скипа генерации джарника
+bootJar {
+    enabled = false
+}

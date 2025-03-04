@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: User Credit API
+  version: 1.0.0
+  description: API для управления кредитами пользователей
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /credits:
+    get:
+      summary: Получить список кредитов
+      operationId: getCredits
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Credit'
+    post:
+      summary: Создать новый кредит
+      operationId: createCredit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credit'
+      responses:
+        '201':
+          description: Кредит успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+  /credits/{id}:
+    get:
+      summary: Получить кредит по ID
+      operationId: getCreditById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID кредита
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '404':
+          description: Кредит не найден
+    put:
+      summary: Обновить кредит
+      operationId: updateCredit
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID кредита
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credit'
+      responses:
+        '200':
+          description: Кредит успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credit'
+        '404':
+          description: Кредит не найден
+    delete:
+      summary: Удалить кредит
+      operationId: deleteCredit
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID кредита
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Кредит успешно удален
+        '404':
+          description: Кредит не найден
+components:
+  schemas:
+    Credit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        amount:
+          type: number
+          format: float
+          example: 1000.0
+        interestRate:
+          type: number
+          format: float
+          example: 5.0
+        userId:
+          type: string
+          example: "user123"
