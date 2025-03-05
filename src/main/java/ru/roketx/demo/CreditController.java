@@ -13,27 +13,26 @@ public class CreditController implements ru.rocketx.generated.internal.api.Credi
 
     @Override
     public Mono<ResponseEntity<Credit>> createCredit(Mono<Credit> credit, ServerWebExchange exchange) {
-        return Mono.empty();
+        return Mono.empty(); // Возвращаем пустой Mono
     }
 
     @Override
     public Mono<ResponseEntity<Flux<Credit>>> getCredits(ServerWebExchange exchange) {
-        return null;
+        return Mono.empty(); // Возвращаем пустой Mono
     }
-
 
     @Override
     public Mono<ResponseEntity<Void>> deleteCredit(String id, ServerWebExchange exchange) {
-        return null;
+        return Mono.empty(); // Возвращаем пустой Mono
     }
 
     @Override
     public Mono<ResponseEntity<Credit>> getCreditById(String id, ServerWebExchange exchange) {
-        return null;
+        return Mono.empty(); // Возвращаем пустой Mono
     }
 
     @Override
     public Mono<ResponseEntity<Credit>> updateCredit(String id, Mono<Credit> credit, ServerWebExchange exchange) {
-        return null;
+        return Mono.empty(); // Возвращаем пустой Mono
     }
 }

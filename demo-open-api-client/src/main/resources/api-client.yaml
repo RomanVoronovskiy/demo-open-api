@@ -4,9 +4,9 @@ info:
   version: 1.0.0
   description: API для управления внутренними приложениями
 servers:
-  - url: 'http://localhost:8080/v1/external'
+  - url: 'http://localhost:8080'
 paths:
-  /v1/external/credits:
+  /v1/internal/credits:
     post:
       summary: Создать новый кредит
       operationId: createCredit
