@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Internal Applications API
+  title: Client Applications API
   version: 1.0.0
-  description: API для управления внутренними приложениями
+  description: API клиента
 servers:
   - url: 'http://localhost:8080'
 paths:

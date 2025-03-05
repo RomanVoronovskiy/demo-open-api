@@ -9,7 +9,7 @@ paths:
       summary: Получить список кредитов
       operationId: getCredits
       tags:
-        - CreditApiInt  # Добавляем тег
+        - CreditApiInt
       responses:
         '200':
           description: Успешный ответ
@@ -23,7 +23,7 @@ paths:
       summary: Создать новый кредит
       operationId: createCredit
       tags:
-        - CreditApiInt  # Добавляем тег
+        - CreditApiInt
       requestBody:
         required: true
         content:
@@ -42,7 +42,7 @@ paths:
       summary: Получить кредит по ID
       operationId: getCreditById
       tags:
-        - TEST  # Добавляем тег
+        - TEST
       parameters:
         - name: id
           in: path
@@ -63,7 +63,7 @@ paths:
       summary: Обновить кредит
       operationId: updateCredit
       tags:
-        - TEST  # Добавляем тег
+        - TEST
       parameters:
         - name: id
           in: path
@@ -90,7 +90,7 @@ paths:
       summary: Удалить кредит
       operationId: deleteCredit
       tags:
-        - TEST  # Добавляем тег
+        - TEST
       parameters:
         - name: id
           in: path

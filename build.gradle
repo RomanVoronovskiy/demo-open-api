@@ -26,7 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation project(':demo-open-api-client')
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow' // Keep this if you want to use Undertow
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
 }
 
 bootJar {
