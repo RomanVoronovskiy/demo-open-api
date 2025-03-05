@@ -28,7 +28,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.34'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.0.0'
 }
 
 
@@ -38,13 +37,12 @@ ext {
     apiBaseUrl = "http://localhost:8080"
 }
 
-// Задача для генерации внешнего API
 tasks.register('generateClientApi', GenerateTask) {
     generatorName.set('java')
     configOptions.set([
-            library: 'webclient',
+            library: 'resttemplate',
             openApiNullable: 'false',
-            useJakartaEe: 'true' // Добавьте эту строку
+            useJakartaEe: 'true'
     ])
     inputSpec.set("$projectDir/src/main/resources/api-client.yaml")
     invokerPackage.set("ru.rocketx.generated.client")
@@ -53,7 +51,6 @@ tasks.register('generateClientApi', GenerateTask) {
     outputDir.set(generatedDir)
 }
 
-// Задача для генерации внутреннего API
 tasks.register('generateInternalApi', GenerateTask) {
     generatorName.set("spring")
     inputSpec.set("$projectDir/src/main/resources/api-internal.yaml")
@@ -71,28 +68,24 @@ tasks.register('generateInternalApi', GenerateTask) {
             generatedConstructorWithRequiredArgs: "false",
             openApiNullable: "false",
             useSpringBoot3: "true",
-            useTags: "true"
+            useTags: "true",
     ])
 }
 
-// Задача компиляции Java зависит от обеих задач генерации
 tasks.named("compileJava") {
     dependsOn(generateClientApi, generateInternalApi)
 }
 
-// Добавьте сгенерированные директории в sourceSets
 sourceSets.main.java.srcDir "${generatedDir}/src/main/java/ru/rocketx/generated"
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-// Блок скипа генерации джарника
 bootJar {
     enabled = false
 }
 
-// Настройка публикации
 publishing {
     publications {
         mavenJava(MavenPublication) {
