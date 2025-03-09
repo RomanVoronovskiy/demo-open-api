@@ -21,7 +21,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.2.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.1'
+//    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.2.1'
     implementation 'io.swagger.core.v3:swagger-annotations:2.2.2'
     implementation 'jakarta.validation:jakarta.validation-api:3.0.1'
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
@@ -60,8 +61,8 @@ tasks.register('generateInternalApi', GenerateTask) {
     ignoreFileOverride.set("$projectDir/.openapi-generator-ignore")
     configOptions.set([
             interfaceOnly: "true",
-            skipDefaultInterface: "true",
-            reactive: "true",
+            skipDefaultInterface: "false",
+//            reactive: "true",
             generateModel: "true",
             generateApi: "true",
             additionalModelTypeAnnotations: "@lombok.Builder(toBuilder = true)\n@lombok.RequiredArgsConstructor\n@lombok.AllArgsConstructor\n@com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown=true)",

@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: User Credit API
   version: 1.0.0
-  description: API для управления кредитами пользователей
+  description: API демо по кредитам
 paths:
   /credits:
     get:

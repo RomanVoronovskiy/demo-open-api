@@ -1,39 +1,40 @@
 package ru.roketx.demo;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import ru.rocketx.generated.model.Credit;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/v1/internal")
 public class CreditController implements ru.rocketx.generated.internal.api.CreditApiIntApi,
         ru.rocketx.generated.internal.api.TestApi {
 
 
     @Override
-    public Mono<ResponseEntity<Credit>> createCredit(Mono<Credit> credit, ServerWebExchange exchange) {
+    public ResponseEntity<Credit> createCredit(Credit credit) {
         return null;
     }
 
     @Override
-    public Mono<ResponseEntity<Flux<Credit>>> getCredits(ServerWebExchange exchange) {
+    public ResponseEntity<List<Credit>> getCredits() {
         return null;
     }
 
     @Override
-    public Mono<ResponseEntity<Void>> deleteCredit(String id, ServerWebExchange exchange) {
+    public ResponseEntity<Void> deleteCredit(String id) {
         return null;
     }
 
     @Override
-    public Mono<ResponseEntity<Credit>> getCreditById(String id, ServerWebExchange exchange) {
+    public ResponseEntity<Credit> getCreditById(String id) {
         return null;
     }
 
     @Override
-    public Mono<ResponseEntity<Credit>> updateCredit(String id, Mono<Credit> credit, ServerWebExchange exchange) {
+    public ResponseEntity<Credit> updateCredit(String id, Credit credit) {
         return null;
     }
 }
