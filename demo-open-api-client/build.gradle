@@ -18,13 +18,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.1' // Актуальная версия
-    implementation 'io.swagger.core.v3:swagger-annotations:2.2.2' // Актуальная версия
-    implementation 'jakarta.validation:jakarta.validation-api:3.0.1' // Актуальная версия
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.1'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.2'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.1'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.34'
-    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1' // Актуальная версия
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15' // Актуальная версия
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
 }
+
 
 openApiGenerate {
     generatorName.set("spring") // Используйте Spring генератор (обяз.)
@@ -47,14 +49,6 @@ tasks.named("compileJava"){
     dependsOn("openApiGenerate")
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDir "$buildDir/generated-sources/swagger/src/main/java" // Добавьте сгенерированные файлы в исходники
-//        }
-//    }
-//}
-
 sourceSets {
     main {
         java {
@@ -63,11 +57,6 @@ sourceSets {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
-//Блок скипа генерации джарника
 bootJar {
     enabled = false
 }
